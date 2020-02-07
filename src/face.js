@@ -144,7 +144,9 @@ var face = function (key, host) {
      * @param  {string}  options.url                    - URL to image to be used
      * @param  {string}  options.path                   - Path to image to be used
      * @param  {string}  options.data                   - Image as a binary buffer
+     * @param  {string}  options.detectionModel         - The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include "detection_01" or "detection_02".
      * @param  {boolean} options.returnFaceId           - Include face ID in response?
+     * @param  {boolean} options.returnRecognitionModel - Return 'recognitionModel' or not. The default value is false.
      * @param  {boolean} options.analyzesAccessories    - Analyze accessories?
      * @param  {boolean} options.analyzesAge            - Analyze age?
      * @param  {boolean} options.analyzesBlur           - Analyze blur?
@@ -182,7 +184,9 @@ var face = function (key, host) {
             qs = {
                 returnFaceId: !!options.returnFaceId,
                 returnFaceLandmarks: returnFaceLandmarks,
-                returnFaceAttributes: attributes.join()
+                returnFaceAttributes: attributes.join(),
+                returnRecognitionModel: !!options.returnRecognitionModel,
+                detectionModel: !!options.detectionModel
             };
         }
         return _postImage(detectPath, options, qs);
