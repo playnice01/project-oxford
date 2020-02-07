@@ -145,6 +145,7 @@ var face = function (key, host) {
      * @param  {string}  options.path                   - Path to image to be used
      * @param  {string}  options.data                   - Image as a binary buffer
      * @param  {string}  options.detectionModel         - The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include "detection_01" or "detection_02".
+     * @param  {string}  options.recognitionModel       - The 'recognitionModel' associated with the detected faceIds. Supported 'recognitionModel' values include "recognition_01" or "recognition_02".
      * @param  {boolean} options.returnFaceId           - Include face ID in response?
      * @param  {boolean} options.returnRecognitionModel - Return 'recognitionModel' or not. The default value is false.
      * @param  {boolean} options.analyzesAccessories    - Analyze accessories?
@@ -167,11 +168,16 @@ var face = function (key, host) {
     function detect(options) {
         var qs = {};
         if (options) {
+            console.info(options);
             var returnFaceLandmarks = false;
+            var returnRecognitionModel = false;
+            var detectionModel = '';
+            var recognitionModel = '';
             if (options.hasOwnProperty('analyzesFaceLandmarks')) {
                 returnFaceLandmarks = !!options.analyzesFaceLandmarks;
                 delete options.analyzesFaceLandmarks;
             }
+
             let attributes = [];
             for (var key in options) {
                 if (options.hasOwnProperty(key)) {
@@ -185,8 +191,9 @@ var face = function (key, host) {
                 returnFaceId: !!options.returnFaceId,
                 returnFaceLandmarks: returnFaceLandmarks,
                 returnFaceAttributes: attributes.join(),
-                returnRecognitionModel: !!options.returnRecognitionModel,
-                detectionModel: !!options.detectionModel
+                returnRecognitionModel: true,
+                detectionModel: !!options.detectionModel,
+                recognitionModel: !!options.recognitionModel
             };
         }
         return _postImage(detectPath, options, qs);

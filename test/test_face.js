@@ -38,7 +38,8 @@ describe('Project Oxford Face API Test', function () {
                 analyzesGender: true,
                 analyzesHeadPose: true,
                 analyzesGlasses: true,
-                analyzesEmotion: true
+                analyzesEmotion: true,
+                returnRecognitionModel: true
             }).then(function (response) {
                 assert.ok(billFaceId = response[0].faceId);
                 assert.ok(response[0].faceRectangle);

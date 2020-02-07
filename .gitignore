@@ -38,3 +38,4 @@ node_modules
 
 # jsdoc2md intermediate file
 api.md
+/test/test_api.js
